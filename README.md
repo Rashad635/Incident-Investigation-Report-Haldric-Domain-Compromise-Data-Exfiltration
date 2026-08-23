@@ -663,6 +663,19 @@ Command Line:
 <img width="1793" height="423" alt="remip logins" src="https://github.com/user-attachments/assets/0135016b-eff6-4925-9ad5-ab86360790df" />
 
 
+## Appendix C: Threat Intelligence Findings Screenshots
+
+**Screenshots:**
+<img width="1500" height="805" alt="Domain tools" src="https://github.com/user-attachments/assets/243253b6-f550-4b34-9b92-4bed24a8880f" />
+<img width="1907" height="855" alt="VirusTotal 185 220 101 34" src="https://github.com/user-attachments/assets/8b82d0bb-e925-4878-974b-c4422cf39e2e" />
+<img width="1665" height="650" alt="AbuseDB 185 220 101 34" src="https://github.com/user-attachments/assets/09b77f68-7479-4a27-958c-75f1b3070170" />
+<img width="1671" height="760" alt="45 153 160 88" src="https://github.com/user-attachments/assets/a5ce7210-f84a-4d69-bac3-a2b156a0fba0" />
+<img width="1681" height="718" alt="91 234 33 126" src="https://github.com/user-attachments/assets/12e020e5-beca-47a7-aeae-37e3ac9da876" />
+
+
+
+
+
 
 
 
