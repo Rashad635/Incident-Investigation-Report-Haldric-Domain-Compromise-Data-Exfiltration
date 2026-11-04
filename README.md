@@ -12,28 +12,27 @@
 
 ## Executive Summary
 
-Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor successfully compromised the Haldric network. Initial access was obtained on 2026-02-20 02:14:00 UTC through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt on 2026-02-19 23:47:12 UTC. 
+Between 2026-02-19 23:47:12 UTC and 2026-03-04 02:44:59 UTC, an external threat actor successfully compromised the Haldric network. Initial access occurred on 2026-02-20 at 02:14:00 UTC through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt on 2026-02-19 at 23:47:12 UTC.
 
-According to AbuseIPDB, the IP address is geolocated to Berlin, State of Berlin, Germany, has an abuse confidence score of 100%, and has been reported 8,493 times, while VirusTotal also recorded 15 out of 91 security vendors flagging it as malicious at the time of the investigation. The address is also associated with The Onion Router (Tor), an anonymity network that routes internet traffic through multiple relays to make users' original IP addresses harder to identify.
+According to AbuseIPDB, the IP address is geolocated to Berlin, State of Berlin, Germany, has an abuse confidence score of 100%, and has been reported 8,493 times. VirusTotal also recorded detections from 15 of 91 security vendors at the time of the investigation. The IP address is associated with The Onion Router (Tor), an anonymity network that routes internet traffic through multiple relays to make users' original IP addresses harder to identify.
 
-Following initial access, on 2026-02-20 02:14:30 UTC, the attacker began conducting extensive system discovery and Active Directory enumeration, and on 2026-02-26 02:38:48 UTC, started harvesting credentials from LSASS and the Security Account Manager (SAM). The attacker, on 2026-02-28 03:14:59 UTC, subsequently moved laterally to the Domain Controller (SRV-DC01) and engineering file server (SRV-FILES02) on 2026-02-28 03:16:05 UTC, expanding access across the network.
+Following initial access, the attacker conducted extensive system discovery and Active Directory enumeration on 2026-02-20 at 02:14:30 UTC. On 2026-02-26 at 02:38:48 UTC, the attacker began harvesting credentials from LSASS and the Security Account Manager (SAM).
 
-The attacker, on 2026-02-28 03:17:29 UTC, then started to stage, compress, and Base64-encode sensitive avionics data associated with the A400M_NavSys project.
+On 2026-02-28, the attacker moved laterally across the network, accessing the Domain Controller (SRV-DC01) at 03:14:59 UTC and the engineering file server (SRV-FILES02) at 03:16:05 UTC, thereby expanding access to critical network resources.
 
-2026-02-28 03:22:59 UTC, the attacker created a backup of the Active Directory database (ntds.dit) using ntdsutil, potentially enabling access to domain credentials and directory information.
+At 03:17:29 UTC on the same day, the attacker began staging, compressing, and Base64-encoding sensitive avionics data associated with the A400M_NavSys project. At 03:22:59 UTC, the attacker created a backup of the Active Directory database (ntds.dit) using ntdsutil, potentially obtaining access to domain credentials and directory information.
 
-ON 2026-03-02 01:19:15 UTC, the attacker exfiltrated the staged data to the external domain cdn-telemetry[.]cloud-endpoint[.]net. 
+On 2026-02-28 at 03:25:26 UTC, the attacker initiated cleanup activities to conceal their actions and hinder forensic investigation. These activities included deleting staged files and clearing the Windows Security event log.
 
-To conceal their activities and hinder forensic investigation, on 2026-02-28 03:25:26 UTC, the attacker began performing cleanup operations, including deleting staging files and clearing the Windows Security event log.
+On 2026-03-02 at 01:19:15 UTC, the attacker exfiltrated the staged data to the external domain cdn-telemetry[.]cloud-endpoint[.]net.
 
-
-The last observed activity by the attacker was on 2026-03-04 02:44:59 UTC on the WS-ENG04 workstation, downloading a file from the same external website and saving it on the computer.
+The last observed attacker activity occurred on 2026-03-04 at 02:44:59 UTC on the WS-ENG04 workstation. The attacker downloaded a file from cdn-telemetry[.]cloud-endpoint[.]net and saved it as response.txt in C:\Windows\Temp.
 
 ## Scope of Investigation
 
 **Time Frame:**
 - Start Time: 2026-02-19 23:47:12 UTC
-- End Time: 2026-03-05 14:28:51 UTC
+- End Time: 2026-03-04 02:44:59 UTC
 
 **Affected Assets:**
 
