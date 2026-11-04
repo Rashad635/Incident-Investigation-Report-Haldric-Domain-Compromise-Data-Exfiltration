@@ -12,7 +12,9 @@
 
 ## Executive Summary
 
-Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor successfully compromised the Haldric network. Initial access was obtained through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt. According to AbuseIPDB, the IP address is geolocated to Berlin, State of Berlin, Germany, has an abuse confidence score of 100%, and has been reported 8,493 times, while VirusTotal also recorded 15 out of 91 security vendors flagging it as malicious at the time of the investigation. The address is also associated with The Onion Router (Tor), an anonymity network that routes internet traffic through multiple relays to make users' original IP addresses harder to identify.
+Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor successfully compromised the Haldric network. Initial access was obtained through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt. 
+
+According to AbuseIPDB, the IP address is geolocated to Berlin, State of Berlin, Germany, has an abuse confidence score of 100%, and has been reported 8,493 times, while VirusTotal also recorded 15 out of 91 security vendors flagging it as malicious at the time of the investigation. The address is also associated with The Onion Router (Tor), an anonymity network that routes internet traffic through multiple relays to make users' original IP addresses harder to identify.
 
 Following initial access, the attacker conducted extensive system discovery and Active Directory enumeration, and harvested credentials from LSASS and the Security Account Manager (SAM). The attacker subsequently moved laterally to the Domain Controller (SRV-DC01) and engineering file server (SRV-FILES02), expanding access across the network.
 
