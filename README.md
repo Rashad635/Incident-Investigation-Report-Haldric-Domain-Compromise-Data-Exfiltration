@@ -67,7 +67,7 @@ Domain compromise and exfiltration of A400M Avionics data
 
 **WHEN**
 - Start Time: 2026-02-19 23:47:12 UTC
-- End Time: 2026-03-05 14:28:51 UTC
+- End Time: 2026-03-04 02:44:59 UTC
 
 **WHY**
 
