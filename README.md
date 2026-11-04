@@ -59,7 +59,7 @@ The IP addresses 185[.]220[.]101[.]34, 45[.]153[.]160[.]88, and 91[.]234[.]33[.]
 
 **HOW**
 
-Compromised VPN account, dumped credentials, and moved laterally via SMB/WMI
+Compromised account, dumped credentials, and moved laterally via SMB/WMI
 
 **WHAT**
 
@@ -71,7 +71,7 @@ Domain compromise and exfiltration of A400M Avionics data
 
 **WHY**
 
-Data exfiltration of sensitive engineering intellectual property
+To steal sensitive engineering intellectual property and potentially prepare for a ransomware attack
 
 ## Incident Timeline
 
