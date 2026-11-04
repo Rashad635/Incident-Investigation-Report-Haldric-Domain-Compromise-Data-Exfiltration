@@ -12,9 +12,11 @@
 
 ## Executive Summary
 
-Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor compromised the Haldric network. Initial access was gained through a successful VPN login using the account s.brandt from the IP address 185[.]220[.]101[.]34. The attacker established a foothold on the engineering workstation WS-ENG04, performed extensive discovery and Active Directory enumeration, dumped credentials (LSASS and SAM), and moved laterally to the Domain Controller (SRV-DC01) and the engineering file server (SRV-FILES02).
+Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor compromised the Haldric network. The attacker gained initial access through a successful login using the s.brandt account from IP address 185[.]220[.]101[.]34, geolocated to Berlin, State of Berlin, with an abuse score of 100% and reported 8,813 times per AbuseIPDB records. The IP address is related to The Onion Router (TOR), which is designed to protect users' identities and make their internet activities harder to trace.
 
-Sensitive Avionics data related to the A400M_NavSys was staged, compressed, Base64-encoded, and exfiltrated to the external domain cdn-telemetry [.] cloud-endpoint [.] net. The attacker also created an Active Directory database backup (ntds.dit) using ntdsutil and performed cleanup actions, including deletion of staging files and clearing of the Security event log.
+The attacker established a foothold on the engineering workstation WS-ENG04, performed extensive discovery and Active Directory enumeration, dumped credentials (LSASS and SAM), and moved laterally to the Domain Controller (SRV-DC01) and the engineering file server (SRV-FILES02).
+
+The attacker staged, compressed, Base64-encoded, and exfiltrated sensitive Avionics data related to the A400M_NavSys to the external domain cdn-telemetry[.]cloud-endpoint[.]net. The attacker also created an Active Directory database backup (ntds.dit) using ntdsutil and performed cleanup actions, including deleting staging files and clearing the Security event log.
 
 ## Scope of Investigation
 
@@ -202,7 +204,7 @@ On workstation WS-ENG04, the attacker downloaded a file from the same external w
 The investigation confirmed:
 - Successful logins via compromised VPN accounts
 - Credential dumping (LSASS and SAM)
-- Lateral movement to Domain Controller and File Server
+- Lateral movement to the Domain Controller and File Server
 - Creation of Active Directory database backup
 - Staging and exfiltration of sensitive A400M Avionics data
 - Defense evasion through log clearing and file deletion
