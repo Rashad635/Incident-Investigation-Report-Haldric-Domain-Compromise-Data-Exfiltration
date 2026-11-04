@@ -12,7 +12,7 @@
 
 ## Executive Summary
 
-Between 19 February 2026 and 05 March 2026, an external threat actor compromised the Haldric network. Initial access was gained through a successful VPN login using the account s.brandt from the IP address 185[.]220[.]101[.]34. The attacker established a foothold on the engineering workstation WS-ENG04, performed extensive discovery and Active Directory enumeration, dumped credentials (LSASS and SAM), and moved laterally to the Domain Controller (SRV-DC01) and the engineering file server (SRV-FILES02).
+Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor compromised the Haldric network. Initial access was gained through a successful VPN login using the account s.brandt from the IP address 185[.]220[.]101[.]34. The attacker established a foothold on the engineering workstation WS-ENG04, performed extensive discovery and Active Directory enumeration, dumped credentials (LSASS and SAM), and moved laterally to the Domain Controller (SRV-DC01) and the engineering file server (SRV-FILES02).
 
 Sensitive Avionics data related to the A400M_NavSys was staged, compressed, Base64-encoded, and exfiltrated to the external domain cdn-telemetry [.] cloud-endpoint [.] net. The attacker also created an Active Directory database backup (ntds.dit) using ntdsutil and performed cleanup actions, including deletion of staging files and clearing of the Security event log.
 
@@ -47,11 +47,11 @@ The IP addresses 185[.]220[.]101[.]34, 45[.]153[.]160[.]88, and 91[.]234[.]33[.]
 
 **HOW**
 
-Compromised VPN account , dumped credential and move lateral via SMB/WMI
+Compromised VPN account, dumped credentials, and moved laterally via SMB/WMI
 
 **WHAT**
 
-Domain compromise, and exfiltration of A400M Avionics data
+Domain compromise and exfiltration of A400M Avionics data
 
 **WHEN**
 - Start Time: 2026-02-19 23:47:12 UTC
@@ -200,7 +200,7 @@ On workstation WS-ENG04, the attacker downloaded a file from the same external w
 ## Findings & Technical Analysis
 
 The investigation confirmed:
-- Successful logins access via compromised VPN accounts
+- Successful logins via compromised VPN accounts
 - Credential dumping (LSASS and SAM)
 - Lateral movement to Domain Controller and File Server
 - Creation of Active Directory database backup
@@ -208,15 +208,15 @@ The investigation confirmed:
 - Defense evasion through log clearing and file deletion
 
 Impact Assessment
-- Confidentiality: High Sensitive engineering intellectual property (A400M_NavSys) was exfiltrated.
-- Integrity: High Full control over Domain Controller obtained.
+- Confidentiality: High. Sensitive engineering intellectual property (A400M_NavSys) was exfiltrated.
+- Integrity: High. Full control over the Domain Controller was obtained.
 - Business Impact: Significant risk of intellectual property theft and potential regulatory consequences.
 
 **Threat Intelligence Findings**
 
-According to DomainTools the domain cloud-endpoint[.]net was created on 2026-01-06.  VirusTotal reported that no security vendors flagged the domain net as malicious and the domain was not listed in AbuseIPDB, it was nevertheless used for data exfiltration during the incident.
+According to DomainTools, the domain cloud-endpoint[.]net was created on 2026-01-06.  VirusTotal reported that no security vendors flagged the domain net as malicious, and the domain was not listed in AbuseIPDB; it was nevertheless used for data exfiltration during the incident.
 
-The IP addresses 185[.]220[.]101[.]34, 45[.]153[.]160[.]88 and 91[.]234[.]33[.]126 are associated with VPN infrastructure. Both VirusTotal and AbuseIPDB flag 185[.]220[.]101[.]34, and 45[.]153[.]160[.]88 as malicious, whiles 91[.]234[.]33[.]126 was flag by VirusTotal and not found in AbuseIPDB database.
+The IP addresses 185[.]220[.]101[.]34, 45[.]153[.]160[.]88 and 91[.]234[.]33[.]126 are associated with VPN infrastructure. Both VirusTotal and AbuseIPDB flag 185[.]220[.]101[.]34 and 45[.]153[.]160[.]88 as malicious, while 91[.]234[.]33[.]126 was flagged by VirusTotal and not found in the AbuseIPDB database.
 
 The observed attack techniques, including LSASS credential dumping via comsvcs.dll, NTDS IFM backup creation, Base64 encoding using certutil, and the cleanup of staging files, are consistent with tactics commonly associated with advanced persistent threat (APT) groups. **(See Appendix C)**
 
@@ -244,7 +244,7 @@ The observed attack techniques, including LSASS credential dumping via comsvcs.d
 - Enriched IOCs through available threat intelligence
 - Documented full attack timeline
 - The entire network was scoped and the last activity observed was on 2026-03-05 14:28:51 UTC where the attacker performed discovery on host WS-ENG04.
-- There was no observed compromise beyond data exfiltration and full domain compromised
+- There was no observed compromise beyond data exfiltration and full domain compromise
 
 ## Recommendations
 
@@ -257,7 +257,7 @@ The observed attack techniques, including LSASS credential dumping via comsvcs.d
 - Implement stricter monitoring for LSASS access, ntdsutil, and certutil -encode
 - Enforce MFA on all VPN and remote access accounts
 - Review and restrict administrative share access
-- If possible, reimage the Domain Controller. Otherwise reset the krbtgt account password twice to invalidate the previous krbtgt secret and any Kerberos tickets that may still be based on the previous key material to help prevent the attacker from using forged Golden Tickets to maintain domain persistence. 
+- If possible, reimage the Domain Controller. Otherwise, reset the krbtgt account password twice to invalidate the previous krbtgt secret and any Kerberos tickets that may still be based on the previous key material to help prevent the attacker from using forged Golden Tickets to maintain domain persistence. 
  
 ## Conclusion
 
@@ -353,7 +353,7 @@ Process:
 - C:\Windows\System32\wbem\WMIC.exe
 
 Command Line: 	
-- wmic logicaldisk get caption,filesystem,freespace,size,volumename
+- wmic logicaldisk get caption, filesystem,freespace, size,volumename
 
 **Screenshot:**
 <img width="1791" height="233" alt="2026-02-23 01 49 35 227" src="https://github.com/user-attachments/assets/802d6320-9988-46e0-912f-db80fa283160" />
