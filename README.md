@@ -12,11 +12,13 @@
 
 ## Executive Summary
 
-Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor compromised the Haldric network. The attacker gained initial access through a successful login using the s.brandt account from IP address 185[.]220[.]101[.]34, geolocated to Berlin, State of Berlin, with an abuse score of 100% and reported 8,813 times per AbuseIPDB records. The IP address is related to The Onion Router (TOR), which is designed to protect users' identities and make their internet activities harder to trace.
+Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor successfully compromised the Haldric network. Initial access was obtained through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt. According to AbuseIPDB, the IP address is geolocated to Berlin, State of Berlin, Germany, has an abuse confidence score of 100%, and has been reported 8,813 times. The address is also associated with The Onion Router (Tor), an anonymity network that routes internet traffic through multiple relays to make users' original IP addresses harder to identify.
 
-The attacker established a foothold on the engineering workstation WS-ENG04, performed extensive discovery and Active Directory enumeration, dumped credentials (LSASS and SAM), and moved laterally to the Domain Controller (SRV-DC01) and the engineering file server (SRV-FILES02).
+Following initial access, the attacker conducted extensive system discovery and Active Directory enumeration, and harvested credentials from LSASS and the Security Account Manager (SAM). The attacker subsequently moved laterally to the Domain Controller (SRV-DC01) and engineering file server (SRV-FILES02), expanding access across the network.
 
-The attacker staged, compressed, Base64-encoded, and exfiltrated sensitive Avionics data related to the A400M_NavSys to the external domain cdn-telemetry[.]cloud-endpoint[.]net. The attacker also created an Active Directory database backup (ntds.dit) using ntdsutil and performed cleanup actions, including deleting staging files and clearing the Security event log.
+The attacker then staged, compressed, and Base64-encoded sensitive avionics data associated with the A400M_NavSys project before exfiltrating it to the external domain cdn-telemetry[.]cloud-endpoint[.]net. Additionally, the attacker created a backup of the Active Directory database (ntds.dit) using ntdsutil, potentially enabling access to domain credentials and directory information.
+
+To conceal their activities and hinder forensic investigation, the attacker performed cleanup operations, including deleting staging files and clearing the Windows Security event log.
 
 ## Scope of Investigation
 
@@ -39,7 +41,7 @@ The attacker staged, compressed, Base64-encoded, and exfiltrated sensitive Avion
 
 **WHO**
 
-The IP addresses 185[.]220[.]101[.]34, 45[.]153[.]160[.]88, and 91[.]234[.]33[.]126 associated with VPN infrastructure using accounts s.brandt and m.richter
+The IP addresses 185[.]220[.]101[.]34, 45[.]153[.]160[.]88, and 91[.]234[.]33[.]126 using accounts s.brandt and m.richter.
 
 **WHERE**
 
