@@ -12,7 +12,7 @@
 
 ## Executive Summary
 
-Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor successfully compromised the Haldric network. Initial access was obtained through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt. According to AbuseIPDB, the IP address is geolocated to Berlin, State of Berlin, Germany, has an abuse confidence score of 100%, and has been reported 8,813 times. The address is also associated with The Onion Router (Tor), an anonymity network that routes internet traffic through multiple relays to make users' original IP addresses harder to identify.
+Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor successfully compromised the Haldric network. Initial access was obtained through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt. According to AbuseIPDB, the IP address is geolocated to Berlin, State of Berlin, Germany, has an abuse confidence score of 100%, and has been reported 8,493 times, while VirusTotal also recorded 15 out of 91 security vendors flagging it as malicious at the time of the investigation. The address is also associated with The Onion Router (Tor), an anonymity network that routes internet traffic through multiple relays to make users' original IP addresses harder to identify.
 
 Following initial access, the attacker conducted extensive system discovery and Active Directory enumeration, and harvested credentials from LSASS and the Security Account Manager (SAM). The attacker subsequently moved laterally to the Domain Controller (SRV-DC01) and engineering file server (SRV-FILES02), expanding access across the network.
 
@@ -218,9 +218,9 @@ Impact Assessment
 
 **Threat Intelligence Findings**
 
-According to DomainTools, the domain cloud-endpoint[.]net was created on 2026-01-06.  VirusTotal reported that no security vendors flagged the domain net as malicious, and the domain was not listed in AbuseIPDB; it was nevertheless used for data exfiltration during the incident.
+According to DomainTools, the domain cloud-endpoint[.]net was created on 2026-01-06.  VirusTotal reported that no security vendors flagged the domain as malicious, and the domain was not listed in AbuseIPDB; it was nevertheless used for data exfiltration during the incident.
 
-The IP addresses 185[.]220[.]101[.]34, 45[.]153[.]160[.]88 and 91[.]234[.]33[.]126 are associated with VPN infrastructure. Both VirusTotal and AbuseIPDB flag 185[.]220[.]101[.]34 and 45[.]153[.]160[.]88 as malicious, while 91[.]234[.]33[.]126 was flagged by VirusTotal and not found in the AbuseIPDB database.
+The IP addresses 185[.]220[.]101[.]34, 45[.]153[.]160[.]88 and 91[.]234[.]33[.]126, with 185[.]220[.]101[.]34 associated with TOR infrastructure. Both VirusTotal and AbuseIPDB flag 185[.]220[.]101[.]34 and 45[.]153[.]160[.]88 as malicious, while 91[.]234[.]33[.]126 was flagged by VirusTotal and not found in the AbuseIPDB database.
 
 The observed attack techniques, including LSASS credential dumping via comsvcs.dll, NTDS IFM backup creation, Base64 encoding using certutil, and the cleanup of staging files, are consistent with tactics commonly associated with advanced persistent threat (APT) groups. **(See Appendix C)**
 
@@ -265,7 +265,7 @@ The observed attack techniques, including LSASS credential dumping via comsvcs.d
  
 ## Conclusion
 
-The investigation confirmed a successful multi-stage intrusion that began with a compromised VPN account and resulted in full domain compromise and the exfiltration of sensitive A400M Avionics data. The attacker demonstrated a high level of operational security by using living-off-the-land binaries, staging data under legitimate-looking filenames, and performing cleanup actions. The last activity observed was on 2026-03-05 14:28:51 UTC, where the attacker performed discovery on host WS-ENG04. Immediate containment and credential rotation are required to prevent further damage.
+The investigation confirmed a successful multi-stage intrusion that began with a compromised account and resulted in full domain compromise and the exfiltration of sensitive A400M Avionics data. The attacker demonstrated a high level of operational security by using living-off-the-land binaries, staging data under legitimate-looking filenames, and performing cleanup actions. The last activity observed was on 2026-03-05 14:28:51 UTC, where the attacker performed discovery on host WS-ENG04. Immediate containment and credential rotation are required to prevent further damage.
 
 
 ## Appendix A: Indicators of Compromise (IOCs)
@@ -274,10 +274,10 @@ The investigation confirmed a successful multi-stage intrusion that began with a
 - cdn-telemetry [.] cloud-endpoint [.] net
 
 **IP Addresses:**
-- 185[.]220[.]101[.]34 (Initial VPN source)
-- 45[.]153[.]160[.]88 (VPN source)
-- 91[.]234[.]33[.]126 (VPN source)
-- 10[.]1[.]96[.]114 (VPN Tunnel IP)
+- 185[.]220[.]101[.]34 
+- 45[.]153[.]160[.]88 
+- 91[.]234[.]33[.]126 
+- 10[.]1[.]96[.]114
 
 **User Accounts:**
 - s.brandt
