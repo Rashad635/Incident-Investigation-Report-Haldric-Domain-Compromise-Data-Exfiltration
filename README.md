@@ -12,15 +12,22 @@
 
 ## Executive Summary
 
-Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor successfully compromised the Haldric network. Initial access was obtained through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt. 
+Between 2026-02-19 23:47:12 UTC and 2026-03-05 14:28:51 UTC, an external threat actor successfully compromised the Haldric network. Initial access was obtained on 2026-02-20 02:14:00 UTC through a successful authentication to the WS-ENG04 workstation using the s.brandt account from IP address 185[.]220[.]101[.]34, following one failed logon attempt on 2026-02-19 23:47:12 UTC. 
 
 According to AbuseIPDB, the IP address is geolocated to Berlin, State of Berlin, Germany, has an abuse confidence score of 100%, and has been reported 8,493 times, while VirusTotal also recorded 15 out of 91 security vendors flagging it as malicious at the time of the investigation. The address is also associated with The Onion Router (Tor), an anonymity network that routes internet traffic through multiple relays to make users' original IP addresses harder to identify.
 
-Following initial access, the attacker conducted extensive system discovery and Active Directory enumeration, and harvested credentials from LSASS and the Security Account Manager (SAM). The attacker subsequently moved laterally to the Domain Controller (SRV-DC01) and engineering file server (SRV-FILES02), expanding access across the network.
+Following initial access, on 2026-02-20 02:14:30 UTC, the attacker began conducting extensive system discovery and Active Directory enumeration, and on 2026-02-26 02:38:48 UTC, started harvesting credentials from LSASS and the Security Account Manager (SAM). The attacker, on 2026-02-28 03:14:59 UTC, subsequently moved laterally to the Domain Controller (SRV-DC01) and engineering file server (SRV-FILES02) on 2026-02-28 03:16:05 UTC, expanding access across the network.
 
-The attacker then staged, compressed, and Base64-encoded sensitive avionics data associated with the A400M_NavSys project before exfiltrating it to the external domain cdn-telemetry[.]cloud-endpoint[.]net. Additionally, the attacker created a backup of the Active Directory database (ntds.dit) using ntdsutil, potentially enabling access to domain credentials and directory information.
+The attacker, on 2026-02-28 03:17:29 UTC, then started to stage, compress, and Base64-encode sensitive avionics data associated with the A400M_NavSys project.
 
-To conceal their activities and hinder forensic investigation, the attacker performed cleanup operations, including deleting staging files and clearing the Windows Security event log.
+2026-02-28 03:22:59 UTC, the attacker created a backup of the Active Directory database (ntds.dit) using ntdsutil, potentially enabling access to domain credentials and directory information.
+
+ON 2026-03-02 01:19:15 UTC, the attacker exfiltrated the staged data to the external domain cdn-telemetry[.]cloud-endpoint[.]net. 
+
+To conceal their activities and hinder forensic investigation, on 2026-02-28 03:25:26 UTC, the attacker began performing cleanup operations, including deleting staging files and clearing the Windows Security event log.
+
+
+The last observed activity by the attacker was on 2026-03-04 02:44:59 UTC on the WS-ENG04 workstation, downloading a file from the same external website and saving it on the computer.
 
 ## Scope of Investigation
 
@@ -137,6 +144,10 @@ Using the account m.richter, the attacker accessed the main system drive of the 
 
 The attacker (User: m.richter) successfully connected to the Domain Controller SRV-DC01 and listed running processes. **(See Appendix B, Section 11)**
 
+**2026-02-28 03:16:05 UTC**
+
+Using the account m.richter, the attacker accessed the file server (SRV-FILES02). **(See Appendix B, Section 10)**
+
 **2026-02-28 03:16:52 UTC**
 
 On the Domain Controller SRV-DC01, the attacker (User: m.richter) started creating a full backup of the Active Directory database (this contains all domain user credentials). **(See Appendix B, Section 12 )**
@@ -201,7 +212,7 @@ The attacker (User: s.brandt) successfully sent the stolen engineering data from
 
 **2026-03-04 02:44:59 UTC**
 
-On workstation WS-ENG04, the attacker downloaded a file from the same external website and saved it on the computer. **(See Appendix B, Section 25)**
+The attacker downloaded a file from the same external website to the WS-ENG04 workstation, saving it as response.txt in C:\Windows\Temp. This was the last observed attacker activity. **(See Appendix B, Section 25)**
 
 ## Findings & Technical Analysis
 
@@ -444,9 +455,12 @@ Process:
 
 Command Line: 	
 - net use \SRV-DC01\C$ /user:m.richter Haldric2025SecIT
+- net  use \\SRV-FILES02\C$ /user:m.richter Haldric2025SecIT
 
 **Screenshot:**
 <img width="1785" height="230" alt="2026-02-28 03 14 59" src="https://github.com/user-attachments/assets/176e6030-0f24-4001-be42-3eb9c09faef6" />
+
+<img width="2410" height="212" alt="Screen Shot 2026-11-04 at 2 32 11 PM" src="https://github.com/user-attachments/assets/82bde6ad-d74a-4646-bee5-c5a5cbcf7285" />
 
 **11. Remote process listing**
 
